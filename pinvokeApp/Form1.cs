@@ -19,13 +19,7 @@ namespace pinvokeApp
 
 		private void textBox1_TextChanged(object sender, EventArgs e)
 		{
-			lblLenAnsi.Text = NativeMethods.GetStringLength1(textBox1.Text).ToString();
-
-			lblLenUnicode.Text = NativeMethods.GetStringLength2(textBox1.Text).ToString();
-
-			lblLenCrazy1.Text = NativeMethods.GetStringLengthCrazy1(textBox1.Text).ToString();
-			
-			lblLenCrazy2.Text = NativeMethods.GetStringLengthCrazy2(textBox1.Text).ToString();
+			lblLenAnsi.Text = NativeMethods.GetStringLength(textBox1.Text).ToString();
 		}
 	}
 }

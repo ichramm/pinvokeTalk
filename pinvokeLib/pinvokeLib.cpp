@@ -1,7 +1,5 @@
 #include "stdafx.h"
 
-//Άλφα Álpha
-
 extern "C" __declspec(dllexport) unsigned int GetStringLengthW(const wchar_t* str) {
 	unsigned int ret = 0;
 	while (*str++)
