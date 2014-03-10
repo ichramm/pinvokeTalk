@@ -30,8 +30,8 @@ namespace pinvokeApp
 		{
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.lblLenAnsi = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// textBox1
@@ -53,35 +53,31 @@ namespace pinvokeApp
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Text";
 			// 
-			// label3
+			// label2
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(12, 88);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(68, 24);
-			this.label3.TabIndex = 3;
-			this.label3.Text = "Length";
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.Location = new System.Drawing.Point(8, 126);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(217, 24);
+			this.label2.TabIndex = 3;
+			this.label2.Text = "Name (from native code)";
 			// 
-			// lblLenAnsi
+			// textBox2
 			// 
-			this.lblLenAnsi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.lblLenAnsi.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLenAnsi.ForeColor = System.Drawing.Color.YellowGreen;
-			this.lblLenAnsi.Location = new System.Drawing.Point(288, 73);
-			this.lblLenAnsi.Name = "lblLenAnsi";
-			this.lblLenAnsi.Size = new System.Drawing.Size(107, 39);
-			this.lblLenAnsi.TabIndex = 5;
-			this.lblLenAnsi.Text = "0";
-			this.lblLenAnsi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.textBox2.Location = new System.Drawing.Point(8, 153);
+			this.textBox2.Name = "textBox2";
+			this.textBox2.Size = new System.Drawing.Size(383, 29);
+			this.textBox2.TabIndex = 2;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(407, 136);
-			this.Controls.Add(this.lblLenAnsi);
-			this.Controls.Add(this.label3);
+			this.ClientSize = new System.Drawing.Size(407, 201);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.textBox2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.textBox1);
 			this.Name = "Form1";
@@ -95,8 +91,8 @@ namespace pinvokeApp
 
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label lblLenAnsi;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TextBox textBox2;
 	}
 }
 

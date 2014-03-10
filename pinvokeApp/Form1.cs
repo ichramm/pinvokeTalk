@@ -19,7 +19,8 @@ namespace pinvokeApp
 
 		private void textBox1_TextChanged(object sender, EventArgs e)
 		{
-			lblLenAnsi.Text = NativeMethods.GetStringLength(textBox1.Text).ToString();
+			MyNativeClass c = new MyNativeClass(textBox1.Text);
+			textBox2.Text = c.Name;
 		}
 	}
 }
