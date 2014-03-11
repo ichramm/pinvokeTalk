@@ -80,9 +80,9 @@ namespace pinvokeApp
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label2.Location = new System.Drawing.Point(181, 9);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(61, 24);
+			this.label2.Size = new System.Drawing.Size(68, 24);
 			this.label2.TabIndex = 4;
-			this.label2.Text = "Name";
+			this.label2.Text = "Integer";
 			// 
 			// textBox3
 			// 
