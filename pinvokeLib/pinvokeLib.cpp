@@ -3,11 +3,11 @@
 //Άλφα Álpha
 
 extern "C" __declspec(dllexport) unsigned int GetStringLengthW(const wchar_t* str) {
-	unsigned int ret = 0;
+	/*unsigned int ret = 0;
 	while (*str++)
 		++ret;
-	return ret;
-	//return wcslen(str);
+	return ret;*/
+	return wcslen(str);
 }
 
 extern "C" __declspec(dllexport) unsigned int GetStringLengthA(const char* str) {
