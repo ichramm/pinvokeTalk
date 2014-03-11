@@ -17,10 +17,24 @@ namespace pinvokeApp
 			InitializeComponent();
 		}
 
+		void UpdateText()
+		{
+			NativeStruct nativeStruct = new NativeStruct();
+			nativeStruct.integer = (int)numericUpDown1.Value;
+			nativeStruct.name = textBox1.Text;
+
+			textBox2.Text = NativeMethods.Serialize(nativeStruct, 1);
+			textBox3.Text = NativeMethods.Serialize(nativeStruct, 2);
+		}
+
 		private void textBox1_TextChanged(object sender, EventArgs e)
 		{
-			MyNativeClass c = new MyNativeClass(textBox1.Text);
-			textBox2.Text = c.Name;
+			UpdateText();
+		}
+
+		private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+		{
+			UpdateText();
 		}
 	}
 }

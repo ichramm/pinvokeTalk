@@ -7,58 +7,54 @@ using System.Runtime.InteropServices;
 
 namespace pinvokeApp
 {
-	class NativeMethods
+	[StructLayout(LayoutKind.Sequential)]
+	struct NativeStruct
+	{
+		public int    integer;
+
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+		public string name;
+	}
+
+	unsafe class NativeMethods
 	{
 		[DllImport("pinvokeLib.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr NativeClass_New(string s);
+		static extern bool NativeStruct_Serialize1(
+			ref NativeStruct hInstance,
+			StringBuilder buffer,
+			[MarshalAs(UnmanagedType.U4)]
+			int bufferSize
+		);
 
-		[DllImport("pinvokeLib.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void NativeClass_Delete(IntPtr hInstance);
-
-		[DllImport("pinvokeLib.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern bool NativeClass_GetName(
-			IntPtr hInstance,
+		[DllImport("pinvokeLib.dll", CallingConvention=CallingConvention.Cdecl)]
+		static extern bool NativeStruct_Serialize2(
+			[MarshalAs(UnmanagedType.Struct)] NativeStruct instance,
 			StringBuilder buffer,
 			[MarshalAs(UnmanagedType.U4)] int bufferSize
 		);
+
+		public static string Serialize(NativeStruct nativeStruct, int function)
+		{
+			StringBuilder sb = new StringBuilder(256);
+
+			switch (function)
+			{
+				case 1:
+					NativeStruct copy = new NativeStruct();
+					copy.integer = nativeStruct.integer;
+					copy.name = nativeStruct.name;
+
+					NativeMethods.NativeStruct_Serialize1(ref copy, sb, sb.Capacity);
+					sb.Append("\r\nNew Int: " + copy.integer);
+					break;
+				case 2:
+					NativeMethods.NativeStruct_Serialize2(nativeStruct, sb, sb.Capacity);
+					sb.Append("\r\nNew Int: " + nativeStruct.integer);
+					break;
+			}
+
+			return sb.ToString();
+		}
 	}
 
-	class MyNativeClass : IDisposable
-	{
-		IntPtr nativeInstance;
-
-		public MyNativeClass(string name)
-		{
-			nativeInstance = NativeMethods.NativeClass_New(name);
-		}
-
-		public string Name
-		{
-			get
-			{
-				StringBuilder b = new StringBuilder(10);
-				while (!NativeMethods.NativeClass_GetName(nativeInstance, b, b.Capacity))
-				{
-					b.Capacity *= 2;
-				}
-
-				return b.ToString();
-			}
-		}
-
-		~MyNativeClass()
-		{
-			if (nativeInstance != IntPtr.Zero)
-			{
-				NativeMethods.NativeClass_Delete(nativeInstance);
-				nativeInstance = IntPtr.Zero;
-			}
-		}
-
-		public void Dispose()
-		{
-			NativeMethods.NativeClass_Delete(nativeInstance);
-			nativeInstance = IntPtr.Zero;
-		}
-	}
 }

@@ -1,50 +1,40 @@
 #include "stdafx.h"
 #include <string>
-using std::string;
 
+#ifdef _MSC_VER
+# define snprintf _snprintf 
+#endif
 
-class MyNativeClass
+struct MyNativeStruct
 {
-public:
-	MyNativeClass(const string& name)
-		: _name(name)
-	{
-		// mmmh, nothing here..
-	}
-
-	string getName() {
-		return _name;
-	}
-
-private:
-	string _name;
+	int  integer;
+	char name[128];
 };
 
-extern "C" __declspec(dllexport) HANDLE NativeClass_New(
-	const char* name
-){
-	return new MyNativeClass{ name };
-}
+extern "C" __declspec(dllexport) BOOL NativeStruct_Serialize1(
+	MyNativeStruct  *hInstance,
+	char            *buffer,
+	unsigned int     bufferSize)
+{
+	int len = snprintf(buffer, bufferSize, "Integer=%d\r\nName=%s\r\nStruct Size=%ld",
+	                   hInstance->integer, hInstance->name, sizeof(*hInstance));
 
-extern "C" __declspec(dllexport) void NativeClass_Delete(
-	HANDLE hInstance
-){
-	delete ((MyNativeClass *)hInstance);
-}
+	hInstance->integer *= 10;
 
-extern "C" __declspec(dllexport) int NativeClass_GetName(
-	HANDLE       hInstance,
-	char        *buffer,
-	unsigned int bufferSize
-){
-	string name = ((MyNativeClass *)hInstance)->getName();
-	OutputDebugStringA(("\nNativeClass_GetName: " + name).c_str());
-
-	if (bufferSize < name.length()+1) {
-		OutputDebugStringA("\n\tNativeClass_GetName: Buffer too small");
-		return 0;
+	if (len >= bufferSize || len < 0)
+	{
+		::SetLastError(ERROR_INSUFFICIENT_BUFFER);
+		return FALSE;
 	}
 
-	strcpy(buffer, name.c_str());
-	return 1;
+	return TRUE;
 }
+
+extern "C" __declspec(dllexport) BOOL NativeStruct_Serialize2(
+	MyNativeStruct  instance,
+	char           *buffer,
+	unsigned int    bufferSize)
+{
+	return NativeStruct_Serialize1(&instance, buffer, bufferSize);
+}
+
